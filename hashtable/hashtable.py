@@ -39,11 +39,6 @@ class HashTable:
 
         Implement this.
         """
-        # Your code here
-        # hash = self.hash_index(key)
-
-        # if hash <= self.capacity:
-        #     self.list[hash] = value
 
         return len(self.data)
 
@@ -53,19 +48,6 @@ class HashTable:
 
         Implement this.
         """
-        # Your code here
-
-        # sum = 0
-        
-        # for index in range(len(self.table)):
-        #     if self.table[index] is not None:
-        #         cur = self.table[index]
-        #         while cur is not None:
-        #             sum += 1
-        #             cur = cur.next
-
-        # load_factor = sum/len(self.table)
-        # return load_factor
 
         return self.count / self.capacity
 
@@ -105,7 +87,6 @@ class HashTable:
         Take an arbitrary key and return a valid integer index
         between within the storage capacity of the hash table.
         """
-        #return self.fnv1(key) % self.capacity
         return self.fnv1(key) % self.capacity
 
     def put(self, key, value):
@@ -116,11 +97,7 @@ class HashTable:
 
         Implement this.
         """
-        # Your code here
-        # hash = self.hash_index(key)
 
-        # if hash <= self.capacity:
-        #     self.list[hash] = value
 
         index = self.hash_index(key)
         hst = HashTableEntry(key, value)
@@ -143,13 +120,7 @@ class HashTable:
 
         Implement this.
         """
-        # Your code here
-        # hash = self.hash_index(key)
 
-        # if hash <= self.capacity:
-        #     self.list[hash] = None
-        # else:
-        #     print('Key not found')
         if key is key:
             self.put(key, None)
             self.count -= 1
@@ -186,29 +157,25 @@ class HashTable:
 
         Implement this.
         """
-        # Your code here
-        # if new_capacity < 8:
-        #     return
-        # old_table = self.list
-        # self.list = [None] * new_capacity
-        # self.capacity = new_capacity
 
-        # for i in range(len(old_table)):
-        #     cur = old_table[i]
-        #     while cur is not None:
-        #         self.put(cur.key, cur.value)
-        #         cur = cur.next
-        
-        new_hashTable = HashTable(new_capacity)
+        new_hashTable = HashTable(new_capacity) #Passes in new_capacity to make a new hashTable
 
-        for entry in self.data:
-            if entry:
-                new_hashTable.put(entry.key, entry.value)
-                if entry.next:
+        for entry in self.data: # for each entry in the table:
+
+            if entry: # check if entry exists
+
+                new_hashTable.put(entry.key, entry.value) # update new hashTable using put methond // pass in key/value
+
+                if entry.next: # check if next entry exists
+
                     current = entry
-                    while current.next:
+
+                    while current.next: # while next entry exists
+
                         current = current.next
-                        new_hashTable.put(current.key, current.value)
+
+                        new_hashTable.put(current.key, current.value) # use put method to modify new hashTable
+                        
         self.data = new_hashTable.data
         self.capacity = new_hashTable.capacity
 
