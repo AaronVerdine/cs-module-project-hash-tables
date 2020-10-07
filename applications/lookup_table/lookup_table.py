@@ -1,13 +1,18 @@
 # Your code here
+import random
+import math
 
+n = 15
+m = 15
+lookup = [[None] * m] * n
 
-def slowfun_too_slow(x, y):
-    v = math.pow(x, y)
-    v = math.factorial(v)
-    v //= (x + y)
-    v %= 982451653
+# def slowfun_too_slow(x, y):
+#     v = math.pow(x, y)
+#     v = math.factorial(v)
+#     v //= (x + y)
+#     v %= 982451653
 
-    return v
+#     return v
 
 def slowfun(x, y):
     """
@@ -15,8 +20,15 @@ def slowfun(x, y):
     output, but completes quickly instead of taking ages to run.
     """
     # Your code here
+    if lookup[x][y] is not None:
+        return lookup[x][y]
 
+    v = math.pow(x, y)
+    v = math.factorial(v)
+    v //= (x + y)    
+    v %= 982451653
 
+    return v
 
 # Do not modify below this line!
 
